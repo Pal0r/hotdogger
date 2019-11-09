@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
     'rest_framework.authtoken',
-    'django_extensions'
+    'django_extensions',
+    'rest_framework_swagger',
 ]
 
 REST_FRAMEWORK = {
@@ -53,6 +54,10 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.TokenAuthentication'
     ]
 }
+
+if DEBUG:
+    REST_FRAMEWORK['DEFAULT_SCHEMA_CLASS'] = 'rest_framework.schemas.coreapi.AutoSchema'
+    REST_FRAMEWORK['USE_SESSION_AUTH'] = False
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
