@@ -17,4 +17,8 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += [path('api-docs/', schema_view)]
+    import debug_toolbar
+    urlpatterns += [
+        path('api-docs/', schema_view),
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]

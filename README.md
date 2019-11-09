@@ -24,3 +24,9 @@ It appears vendors are able to see their competitor's product offering. Often, t
 
 ## Ticket 4
 Hot dog options not yet available are showing up in the vendor items list view. Make sure that only available products are displayed.
+
+## Ticket 5
+Our clients are starting to notice a lag in response times in the vendor item listing. Investigate. If possible improve page queries WITHOUT the aid of caching.
+
+## Ticket 6
+Some clients have 100s of product offerings. Limit the number of offerings on a page.
