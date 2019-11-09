@@ -1,19 +1,18 @@
 from django.test import TestCase, Client
 
-from django.contrib.auth.models import User
-from vendors.models import VendorItem, Vendor
-from django.utils.timezone import now
+from accounts.tests.factories import UserFactory
+from vendors.tests.factories import VendorFactory, VendorItemFactory
 
 
 class TestVendorItemTestCase(TestCase):
     def setUp(self) -> None:
         self.client = Client()
-        self.user = User.objects.create(username='test1', password='bingo123456', is_active=True)
+        self.user = UserFactory()
+        self.vendor = VendorFactory()
+        self.vendor.employees.add(self.user)
+        self.vendor_item = VendorItemFactory(vendor=self.vendor)
 
     def test_get(self):
-        vendor = Vendor.objects.create(name='test vendor')
-        vendor_item = VendorItem.objects.create(name='hotdog', vendor=vendor, available_on=now())
-
         redirect_response = self.client.get('/vendors/items/')
         # Test that only authenticated users can view this page.
         self.assertEqual(redirect_response.status_code, 302)
@@ -23,5 +22,12 @@ class TestVendorItemTestCase(TestCase):
         response = self.client.get('/vendors/items/')
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(response.context['object_list'][0].name, vendor_item.name)
+        # Test view response context contains created vendor item.
+        self.assertEqual(
+            response.context['object_list'][0].name,
+            self.vendor_item.name
+        )
 
+        # Test vendor items in response are within the availability window.
+
+        # Test response does not contain another vendor's items.
