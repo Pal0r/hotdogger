@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            {% if user.is_authenticated %}
+            <h4>Welcome Back! {{ request.user }}</h4>
+            {% else %}
+                <a href="{% url 'login' %}">Please log in</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

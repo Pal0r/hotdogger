@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h4>{{ request.user.first_name }} Here's what's available to sell</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                    <th>Hot Dog</th>
+                    <th>Vendor</th>
+                    <th>Available On</th>
+                    <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for vendor_item in vendor_items %}
+                      <tr>
+                        <td>{{ vendor_item.name }}</td>
+                        <td>{{ vendor_item.vendor.name }}</td>
+                        <td>{{ vendor_item.available_on }}</td>
+                        <td class="small">
+                            <a href="{% url 'update-vendor-item' vendor_item.pk %}">edit</a>
+{#                            <a href="{% url 'delete-vendor-item' vendor_item.pk %}">delete</a>#}
+                        </td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
