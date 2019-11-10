@@ -14,9 +14,8 @@
       <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">Hotdogger</a>
           {% if user.is_authenticated %}<span class="navbar-right">{{ request.user.employer.first.name }} (employee)</span><a class="navbar-right" href="{% url 'logout' %}">Logout</a>{% else %}</span><a class="navbar-right" href="{% url 'login' %}">Login</a>{% endif %}
-
       </nav>
-        <div class="container>
+        <div class="container mt-5">
             {% block content %}{% endblock %}
         </div>
     <!-- Optional JavaScript -->
