@@ -11,6 +11,9 @@ omit =
     *commerce*
     *bpm*
     */source2_adapter*
+    vendors/utils.py
+    *urls.py
+    *settings.py
 
 [paths]
 source =
