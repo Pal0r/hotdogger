@@ -97,17 +97,26 @@ WSGI_APPLICATION = 'hotdogger.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PARENT_DIR = os.path.abspath(os.path.join(BASE_DIR, '..'))
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hotdogger',
-        'PASSWORD': '',
-        'USER': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
-   },
-}
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(PARENT_DIR, 'db.sqlite3'),
+        }
+    }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'hotdogger',
+#         'PASSWORD': 'LaughingLLama',
+#         'USER': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#    },
+# }
 
 
 # Password validation
