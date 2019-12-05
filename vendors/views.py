@@ -1,10 +1,13 @@
 from django.views.generic import ListView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from vendors.models import VendorItem
 
 
-class VendorItemListView(ListView):
+
+
+class VendorItemListView(LoginRequiredMixin, ListView):
     model = VendorItem
     context_object_name = 'vendor_items'
 
