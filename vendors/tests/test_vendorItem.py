@@ -12,6 +12,10 @@ class TestVendorItemTestCase(TestCase):
         self.vendor.employees.add(self.user)
         self.vendor_item = VendorItemFactory(vendor=self.vendor)
 
+    def test___str__(self):
+        vendoritem = VendorItemFactory(vendor=self.vendor)
+        self.assertEqual(vendoritem.name, vendoritem.__str__())
+
     def test_get(self):
         redirect_response = self.client.get('/vendors/items/')
         # Test that only authenticated users can view this page.
