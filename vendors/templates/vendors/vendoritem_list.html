@@ -26,6 +26,9 @@
                   {% endfor %}
               </tbody>
             </table>
+            {% include 'pagination_partial.html' with page_obj=vendor_item%}
         </div>
     </div>
+
 {% endblock %}
+
