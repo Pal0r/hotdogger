@@ -7,7 +7,7 @@ from api.serializers import VendorItemSerializer
 from vendors.models import VendorItem, Vendor
 
 
-class VendorItemModelViewSet(ModelViewSet):
+class VendorItemModelViewSet(LoginRequiredMixin,ModelViewSet):
     """
     retrieve:
         Returns a given Vendor Item/Hotdog.
@@ -29,3 +29,7 @@ class VendorItemModelViewSet(ModelViewSet):
     """
     queryset = VendorItem.objects.all()
     serializer_class = VendorItemSerializer
+
+    def get_queryset(self):
+        requested_vendor = self.request.parser_context['kwargs']['employer_id']         
+        return self.queryset.filter(vendor_id=requested_vendor)
