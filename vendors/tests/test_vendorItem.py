@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.urls import get_resolver
 
 from accounts.tests.factories import UserFactory
 from vendors.tests.factories import VendorFactory, VendorItemFactory
@@ -16,13 +17,29 @@ class TestVendorItemTestCase(TestCase):
         vendoritem = VendorItemFactory(vendor=self.vendor)
         self.assertEqual(vendoritem.name, vendoritem.__str__())
 
+    def cleanUrl(self, tomodify):
+        result = tomodify.replace('(?P<pk>[0-9]+)','1')                
+        result = result.replace('(?P<pk>[^/.]+)','1')
+        result = result.replace('(?P<employer_id>\d+)','1')
+        result = result.replace('$','')
+        return result
+
     def test_get(self):
-        redirect_response = self.client.get('/vendors/items/')
-        # Test that only authenticated users can view this page.
-        self.assertEqual(redirect_response.status_code, 302)
+        
+        # Test that only authenticated users have access to secure urls.        
+        urls = set(v[1] for k,v in get_resolver(None).reverse_dict.items())
+        print('urls:')
+        for url in urls:
+            if url.startswith('vendor'):
+                url = self.cleanUrl(url)                
+                redirect_response = self.client.get('/' + url)
+                self.assertEqual(redirect_response.status_code, 302)
+                print('URL: ' + url)
+        
+        
 
         # Test that logged in users can view the vendor item list page
-        self.client.force_login(self.user)
+        self.client.force_login(self.user)        
         response = self.client.get('/vendors/items/')
         self.assertEqual(response.status_code, 200)
 

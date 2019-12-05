@@ -17,6 +17,8 @@ class TestVendorItemModelViewSet(APITestCase):
         self.auth_token = AuthTokenFactory(user=self.user)
 
     def test_get_queryset(self):
+        
+        
         request = self.factory.get(f'/api/vendor/{self.vendor.pk}/items/')
         force_authenticate(request, user=self.user, token=self.auth_token.key)
         response = self.view(request, employer_id=self.vendor.pk)

@@ -12,7 +12,7 @@ class VendorItemListView(LoginRequiredMixin, ListView):
     context_object_name = 'vendor_items'
 
 
-class VendorItemUpdateView(UpdateView):
+class VendorItemUpdateView(LoginRequiredMixin, UpdateView):
     model = VendorItem
     context_object_name = 'hotdog'
     fields = ['name']

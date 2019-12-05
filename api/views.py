@@ -1,5 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from api.serializers import VendorItemSerializer
 from vendors.models import VendorItem, Vendor
