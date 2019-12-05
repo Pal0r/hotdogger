@@ -16,7 +16,7 @@ class VendorItemListView(LoginRequiredMixin, ListView):
     def get_queryset(self):                
         uservendors = self.request.user.employer.all()
         current_date = datetime.now()        
-        return VendorItem.objects.filter(available_on__lte=current_date, vendor__in=uservendors)
+        return VendorItem.objects.select_related('vendor').filter(available_on__lte=current_date, vendor__in=uservendors)
 
 class VendorItemUpdateView(LoginRequiredMixin, UpdateView):
     model = VendorItem
