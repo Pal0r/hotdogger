@@ -1,7 +1,7 @@
 # New Hire Example Test Project
 This project is designed to test potential hires for structure and Django understanding. It has several flaws the candidate should identify and fix.  
 
-To begin follow steps in the getting started section. After initial setup, create a new git branch for your work. Then tackle each section marked as a ticket in order. To consider a ticket complete you will need replicate, resolve the complaint, and write meaningful unit tests for your solution. Comment & add documentation where necessary
+To begin, fork this repo, and follow steps in the getting started section. Tackle each section marked as a ticket in order. To consider a ticket complete you will need replicate, resolve the complaint, and write meaningful unit tests for your solution. Comment & add documentation where necessary
 
 Once complete, submit a pull request to merge your improvements & fixes to the `master` branch. 
 
